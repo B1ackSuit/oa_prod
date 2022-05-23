@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>cn.ean</groupId>
+    <artifactId>oa_prod</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>oa_prod</name>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>oa-emp</module>
+        <module>oa-mail</module>
+        <module>oa-workflow</module>
+    </modules>
+
+    <properties>
+
+        <springboot-v>2.3.5.RELEASE</springboot-v>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>11</java.version>
+
+        <jwt-v>0.9.0</jwt-v>
+        <kaptcha-v>0.0.9</kaptcha-v>
+
+        <mysql-v>8.0.23</mysql-v>
+        <mybatis-plus-v>3.4.2</mybatis-plus-v>
+        <lombok-v>1.18.16</lombok-v>
+
+        <act-v>7.1.0.M5</act-v>
+
+        <swagger2-v>2.7.0</swagger2-v>
+        <swagger-bootstrap-ui-v>1.9.3</swagger-bootstrap-ui-v>
+        <swagger1-boot-v>1.9.1.RELEASE</swagger1-boot-v>
+
+        <aspectj-v>1.9.6</aspectj-v>
+
+        <rabbit-test-v>2.2.12.RELEASE</rabbit-test-v>
+
+        <batik-v>1.10</batik-v>
+
+        <fastjson-v>1.2.75</fastjson-v>
+
+        <easypoi-v>4.1.3</easypoi-v>
+
+        <druid-v>1.2.5</druid-v>
+
+        <!-- 旧版本的lang3出现漏洞，2.8.1版本的pool2漏洞代码：CVE-2020-15250 -->
+        <commons-pool2-v>2.8.1</commons-pool2-v>
+        <commons-lang3-v>3.12.0</commons-lang3-v>
+
+        <jaxb-api-v>2.3.0</jaxb-api-v>
+    </properties>
+
+
+
+    <!-- 版本控制 -->
+    <dependencyManagement>
+
+        <dependencies>
+
+            <!-- Boot整合security 依赖-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <!-- 子模块若要成功引入此依赖 必须提前声明版本，否则报错版本Unknown -->
+                <version>${springboot-v}</version>
+            </dependency>
+            <!--JWT 依赖-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt-v}</version>
+            </dependency>
+            <!-- google kaptcha 依赖 -->
+            <dependency>
+                <groupId>com.github.axet</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha-v}</version>
+            </dependency>
+
+
+            <!-- activiti7版本 -->
+            <dependency>
+                <groupId>org.activiti.dependencies</groupId>
+                <artifactId>activiti-dependencies</artifactId>
+                <version>${act-v}</version>
+                <type>pom</type>
+            </dependency>
+            <!-- Boot整合activiti7 -->
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring-boot-starter</artifactId>
+                <version>${act-v}</version>
+                <!-- 当使用了mp，就需要排除一下依赖 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.el</groupId>
+                        <artifactId>el-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- java代码绘制activiti流程图 -->
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-image-generator</artifactId>
+                <version>${act-v}</version>
+            </dependency>
+            <!-- activiti的json转换器 -->
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-json-converter</artifactId>
+                <version>${act-v}</version>
+            </dependency>
+
+            <!-- 数据库相关 -->
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-v}</version>
+            </dependency>
+            <!--lombok 依赖-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok-v}</version>
+                <optional>true</optional>
+            </dependency>
+            <!-- mybatis-plus 依赖 -->
+            <!-- Boot整合MP -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-v}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus-v}</version>
+            </dependency>
+
+            <!-- swagger2 依赖 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2-v}</version>
+            </dependency>
+            <!-- Swagger第三方ui 依赖 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-bootstrap-ui-v}</version>
+            </dependency>
+            <!-- 如果是swagger1 依赖如下 -->
+            <dependency>
+                <groupId>com.spring4all</groupId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
+                <version>${swagger1-boot-v}</version>
+            </dependency>
+            <!-- 如果是swagger1并且Spring Boot版本大于2.3.1，需要引入Boot整合validation 依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+            </dependency>
+
+            <!-- aop -->
+            <!-- Boot整合aop -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+            </dependency>
+            <!-- aspectj -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj-v}</version>
+            </dependency>
+
+            <!-- Boot整合AMQP消息队列 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+            </dependency>
+            <!-- rabbit监听器 依赖 -->
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit-test</artifactId>
+                <version>${rabbit-test-v}</version>
+            </dependency>
+
+            <!-- svg(基于xml的图片格式)转换png图片工具 -->
+            <dependency>
+                <groupId>org.apache.xmlgraphics</groupId>
+                <artifactId>batik-all</artifactId>
+                <version>${batik-v}</version>
+            </dependency>
+
+            <!-- alibaba fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson-v}</version>
+            </dependency>
+
+            <!-- easypoi -->
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-spring-boot-starter</artifactId>
+                <version>${easypoi-v}</version>
+            </dependency>
+
+            <!-- Boot整合mail -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
+            </dependency>
+            <!-- Boot整合thymeleaf -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            </dependency>
+
+            <!-- Boot整合websocket -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+            </dependency>
+
+            <!-- Boot整合quartz -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-quartz</artifactId>
+            </dependency>
+
+            <!-- Boot整合Redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+            </dependency>
+
+            <!-- Boot整合Druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-v}</version>
+            </dependency>
+
+            <!-- commons-pool2 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2-v}</version>
+            </dependency>
+            <!-- commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.12.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api-v}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <!-- 减少依赖冲突：防止子模块自动继承此依赖，子模块需要自行引入此依赖 -->
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>
