@@ -181,10 +181,11 @@
             </dependency>
 
             <!-- aop -->
-            <!-- Boot整合aop -->
+            <!-- Boot整合aop 不指定版本同boot security -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${springboot-v}</version>
             </dependency>
             <!-- aspectj -->
             <dependency>
@@ -272,7 +273,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.12.0</version>
+                <version>${commons-lang3-v}</version>
             </dependency>
 
             <dependency>
