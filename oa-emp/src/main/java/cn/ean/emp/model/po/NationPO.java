@@ -21,8 +21,8 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false,of = "name")
 @Accessors(chain = true)
-@TableName("t_nation")
-@ApiModel(value="Nation对象", description="")
+@TableName("oa_nation")
+@ApiModel(value="NationPO对象", description="NationPO对象")
 public class NationPO implements Serializable {
 
     private static final long serialVersionUID = 1L;

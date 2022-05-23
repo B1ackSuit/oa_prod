@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ean.emp.mapper.EmployeeMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ean.emp.model.po.EmployeePO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="idCard" property="idCard"/>
+        <result column="wedlock" property="wedlock"/>
+        <result column="nationId" property="nationId"/>
+        <result column="nativePlace" property="nativePlace"/>
+        <result column="politicId" property="politicId"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="departmentId" property="departmentId"/>
+        <result column="jobLevelId" property="jobLevelId"/>
+        <result column="posId" property="posId"/>
+        <result column="engageForm" property="engageForm"/>
+        <result column="tiptopDegree" property="tiptopDegree"/>
+        <result column="specialty" property="specialty"/>
+        <result column="school" property="school"/>
+        <result column="beginDate" property="beginDate"/>
+        <result column="workState" property="workState"/>
+        <result column="workId" property="workId"/>
+        <result column="contractTerm" property="contractTerm"/>
+        <result column="conversionTime" property="conversionTime"/>
+        <result column="notWorkDate" property="notWorkDate"/>
+        <result column="beginContract" property="beginContract"/>
+        <result column="endContract" property="endContract"/>
+        <result column="workAge" property="workAge"/>
+        <result column="salaryId" property="salaryId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, gender, birthday, idCard,
+        wedlock, nationId, nativePlace, politicId, email,
+        phone, address, departmentId, jobLevelId, posId,
+        engageForm, tiptopDegree, specialty, school, beginDate,
+        workState, workId, contractTerm, conversionTime, notWorkDate,
+        beginContract, endContract, workAge, salaryId
+    </sql>
+
+    <resultMap id="EmployeeInfo" type="cn.ean.emp.model.po.EmployeePO" extends="BaseResultMap">
+        <association property="nationPO" javaType="cn.ean.emp.model.po.NationPO">
+            <id column="nationId" property="id"></id>
+            <result column="nationName" property="name"></result>
+        </association>
+        <association property="politicsStatusPO" javaType="cn.ean.emp.model.po.PoliticsStatusPO">
+            <id column="polStatId" property="id"></id>
+            <result column="polStatName" property="name"></result>
+        </association>
+        <association property="departmentPO" javaType="cn.ean.emp.model.po.DepartmentPO">
+            <id column="depId" property="id"></id>
+            <result column="depName" property="name"></result>
+        </association>
+        <association property="jobLevelPO" javaType="cn.ean.emp.model.po.JobLevelPO">
+            <id column="jobLvId" property="id"></id>
+            <result column="jobLvName" property="name"></result>
+        </association>
+        <association property="positionPO" javaType="cn.ean.emp.model.po.PositionPO">
+            <id column="posId" property="id"></id>
+            <result column="posName" property="name"></result>
+        </association>
+    </resultMap>
+
+
+    <resultMap id="EmployeeWithSalary" type="cn.ean.emp.model.po.EmployeePO" extends="BaseResultMap">
+        <association property="salaryPO" javaType="cn.ean.emp.model.po.SalaryPO">
+            <id column="sid" property="id" />
+            <result column="sname" property="name" />
+            <result column="sbasicSalary" property="basicSalary" />
+            <result column="sbonus" property="bonus" />
+            <result column="slunchSalary" property="lunchSalary" />
+            <result column="strafficSalary" property="trafficSalary" />
+            <result column="sallSalary" property="allSalary" />
+            <result column="spensionBase" property="pensionBase" />
+            <result column="spensionPer" property="pensionPer" />
+            <result column="smedicalBase" property="medicalBase" />
+            <result column="smedicalPer" property="medicalPer" />
+            <result column="saccumulationFundBase" property="accumulationFundBase" />
+            <result column="saccumulationFundPer" property="accumulationFundPer" />
+        </association>
+        <association property="departmentPO" javaType="cn.ean.emp.model.po.DepartmentPO">
+            <result column="dname" property="name" />
+        </association>
+    </resultMap>
+
+
+
+
+
+    <select id="getEmployeeByPage" resultMap="EmployeeInfo">
+        SELECT
+        emp.*,
+        nation.id AS nationId,
+        nation.`name` AS nationName,
+        polstat.id AS polStatId,
+        polstat.`name` AS polStatName,
+        dep.id AS depId,
+        dep.`name` AS depName,
+        joblv.id AS jobLvId,
+        joblv.`name` AS jobLvName,
+        pos.id AS posId,
+        pos.`name` AS posName
+        FROM
+        oa_employee emp,
+        oa_nation nation,
+        oa_politics_status polstat,
+        oa_department dep,
+        oa_joblevel joblv,
+        oa_position pos
+        WHERE
+        emp.nationId = nation.id
+        AND emp.politicId = polstat.id
+        AND emp.departmentId = dep.id
+        AND emp.jobLevelId = joblv.id
+        AND emp.posId = pos.id
+        <if test=" null != employeePO.name and '' != employeePO.name">
+            AND emp.`name` LIKE CONCAT( '%', #{employeePO.name}, '%' )
+        </if>
+        <if test=" null != employeePO.politicId ">
+            AND emp.politicId = #{employeePO.politicId}
+        </if>
+        <if test=" null != employeePO.nationId ">
+            AND emp.nationId = #{employeePO.nationId}
+        </if>
+        <if test=" null != employeePO.jobLevelId ">
+            AND emp.jobLevelId = #{employeePO.jobLevelId}
+        </if>
+        <if test=" null != employeePO.posId ">
+            AND emp.posId = #{employeePO.posId}
+        </if>
+        <if test=" null != employeePO.engageForm and '' != employeePO.engageForm ">
+            AND emp.engageForm = #{employeePO.engageForm}
+        </if>
+        <if test="null!=employee.departmentId">
+            AND emp.departmentId = #{employeePO.departmentId}
+        </if>
+        <if test=" null != beginDateScope and 2 == beginDateScope.length ">
+            AND emp.beginDate BETWEEN #{beginDateScope[0]} AND #{beginDateScope[1]}
+        </if>
+        ORDER BY emp.id
+    </select>
+
+
+    <!-- 查询员工 -->
+    <select id="getEmployee" resultMap="EmployeeInfo">
+        SELECT
+        emp.*,
+        nation.id AS nationId,
+        nation.`name` AS nationName,
+        polstat.id AS polStatId,
+        polstat.`name` AS polStatName,
+        dep.id AS depId,
+        dep.`name` AS depName,
+        joblv.id AS jobLvId,
+        joblv.`name` AS jobLvName,
+        pos.id AS posId,
+        pos.`name` AS posName
+        FROM
+        oa_employee emp,
+        oa_nation nation,
+        oa_politics_status polstat,
+        oa_department dep,
+        oa_joblevel joblv,
+        oa_position pos
+        WHERE
+        emp.nationId = nation.id
+        AND emp.politicId = polstat.id
+        AND emp.departmentId = dep.id
+        AND emp.jobLevelId = joblv.id
+        AND emp.posId = pos.id
+        <if test="null != id">
+            AND emp.id = #{id}
+        </if>
+        ORDER BY
+        emp.id
+    </select>
+
+    <!-- 获取所有员工帐套 -->
+    <select id="getEmployeeWithSalary" resultMap="EmployeeWithSalary">
+        SELECT
+            e.*,
+            d.`name` AS dname,
+            s.id AS sid,
+            s.`name` AS sname,
+            s.basicSalary AS sbasicSalary,
+            s.bonus AS sbouns,
+            s.lunchSalary AS slunchSalary,
+            s.trafficSalary AS strafficSalary,
+            s.allSalary AS sallSalary,
+            s.pensionBase AS spensionBase,
+            s.pensionPer AS spensionPer,
+            s.medicalBase AS smedicalBase,
+            s.medicalPer AS smedicalPer,
+            s.accumulationFundBase AS saccumulationFundBase,
+            s.accumulationFundPer AS saccumulationFundPer
+        FROM
+            oa_employee e
+                LEFT JOIN oa_salary s ON e.salaryId = s.id
+                LEFT JOIN oa_department d ON e.departmentId = d.id
+        ORDER BY
+            e.id
+
+
+    </select>
+
+</mapper>

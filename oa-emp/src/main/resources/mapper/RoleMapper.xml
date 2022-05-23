@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ean.emp.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ean.emp.model.po.RolePO">
+        <id column="id" property="id" />
+        <result column="authority" property="authority" />
+        <result column="authorityName" property="authorityName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, nameZh
+    </sql>
+
+    <!-- 根据用户id查询角色列表 -->
+    <select id="getRoles" resultType="cn.ean.emp.model.po.RolePO">
+        SELECT
+            r.id,
+            r.authority,
+            r.authorityName
+        FROM
+            oa_role AS r
+                LEFT JOIN oa_user_role AS ar ON r.id = ar.roleId
+        WHERE
+            ar.userId = #{userId}
+    </select>
+
+</mapper>

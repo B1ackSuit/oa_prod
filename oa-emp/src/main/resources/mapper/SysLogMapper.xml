@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ean.emp.mapper.SysLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ean.emp.model.po.SysLogPO">
+        <id column="id" property="id"/>
+        <result column="descr" property="descr"/>
+        <result column="ipAddress" property="ipAddress"/>
+        <result column="url" property="url"/>
+        <result column="method" property="method"/>
+        <result column="params" property="params"/>
+        <result column="operUser" property="operUser"/>
+        <result column="createTime" property="createTime"/>
+        <result column="type" property="type"/>
+
+    </resultMap>
+
+
+    <select id="getSysLogByPage" resultMap="BaseResultMap">
+        select * from oa_sys_log where 1=1
+        <if test="null != name and '' != name">
+            AND operUser LIKE CONCAT( '%', #{name}, '%' )
+        </if>
+    </select>
+
+</mapper>

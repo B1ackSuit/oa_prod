@@ -147,10 +147,10 @@ public class EmployeePO implements Serializable {
     @ExcelEntity(name = "民族")
     private NationPO nationPO;
 
-//    @ApiModelProperty(value = "政治面貌")
-//    @TableField(exist = false)
-//    @ExcelEntity(name = "政治面貌")
-//    private PoliticsStatus politicsStatus;
+    @ApiModelProperty(value = "政治面貌")
+    @TableField(exist = false)
+    @ExcelEntity(name = "政治面貌")
+    private PoliticsStatusPO politicsStatusPO;
 
     @ApiModelProperty(value = "部门")
     @TableField(exist = false)
@@ -160,16 +160,16 @@ public class EmployeePO implements Serializable {
     @ApiModelProperty(value = "职称")
     @TableField(exist = false)
     @ExcelEntity(name = "职称")
-    private JobLevelPO joblevelPO;
+    private JobLevelPO jobLevelPO;
 
-//    @ApiModelProperty(value = "职位")
-//    @TableField(exist = false)
-//    @ExcelEntity(name = "职位")
-//    private Position position;
+    @ApiModelProperty(value = "职位")
+    @TableField(exist = false)
+    @ExcelEntity(name = "职位")
+    private PositionPO positionPO;
 
-//    @ApiModelProperty(value = "工资账套")
-//    @TableField(exist = false)
-//    private Salary salary;
+    @ApiModelProperty(value = "工资账套")
+    @TableField(exist = false)
+    private SalaryPO salaryPO;
 
 
 

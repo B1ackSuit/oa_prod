@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ean.emp.mapper.UserMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ean.emp.model.po.UserPO">
+        <id column="id" property="id"/>
+        <result column="workId" property="workId"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="userFace" property="userFace"/>
+        <result column="enabled" property="enabled"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, workId, password, name, phone, userFace, enabled
+    </sql>
+
+
+    <resultMap id="UserWithRole" type="cn.ean.emp.model.po.UserPO" extends="BaseResultMap">
+        <collection property="roles" ofType="cn.ean.emp.model.po.RolePO">
+            <id column="rid" property="id" />
+            <result column="authority" property="authority" />
+            <result column="authorityName" property="authorityName" />
+        </collection>
+    </resultMap>
+
+    <select id="getAllUsers" resultMap="UserWithRole">
+        SELECT
+        user.id,
+        user.workId,
+        user.password,
+        user.name,
+        user.phone,
+        user.userFace,
+        user.enabled,
+        role.id AS rid,
+        role.authority AS authority,
+        role.authorityName AS authorityName
+        FROM
+        oa_user AS user
+        LEFT JOIN oa_user_role AS userrole ON userrole.userId = userrole.id
+        LEFT JOIN oa_role AS role ON userrole.roleId = role.id
+        WHERE
+        user.id != #{id}
+        <if test = "null != keyWords and '' != keyWords" >
+            AND user.name LIKE concat ('%',#{keyWords},'%')
+        </if>
+        ORDER BY
+        user.id
+    </select>
+
+</mapper>
