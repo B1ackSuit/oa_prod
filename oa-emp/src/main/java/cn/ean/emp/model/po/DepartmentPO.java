@@ -13,6 +13,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,10 +23,13 @@ import java.util.List;
  **/
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Accessors(chain = true)
 @TableName("oa_department")
 @ApiModel(value = "DepartmentPO对象", description = "DepartmentPO对象")
-public class DepartmentPO {
+public class DepartmentPO implements Serializable {
+
+    public static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)

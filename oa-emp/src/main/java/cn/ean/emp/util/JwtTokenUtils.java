@@ -50,8 +50,7 @@ public class JwtTokenUtils {
         try {
             Claims claims = getClaimsFromToken(token);
             userName = claims.getSubject();
-            System.out.println("\n\n=====JwtTokenUtils  debugger: " +
-                    "\busername:" + userName);
+            System.out.println("=====JwtTokenUtils  debugger: username:" + userName);
         } catch (Exception e) {
             userName = null;
             System.out.println("====error====JwtTokenUtil-getUserNameFromToken");
@@ -75,8 +74,7 @@ public class JwtTokenUtils {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-            System.out.println("\n\n=====JwtTokenUtils  debugger: " +
-                    "\bclaims:" + claims.toString());
+
         } catch (ExpiredJwtException e) {
             e.printStackTrace();
         }

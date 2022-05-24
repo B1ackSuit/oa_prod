@@ -6,6 +6,7 @@ target/
 
 application-local.yml
 application-yun.yml
+test/java/cn/ean/emp
 
 ### STS ###
 .apt_generated

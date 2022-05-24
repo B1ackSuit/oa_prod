@@ -16,7 +16,7 @@ public interface IMenuService extends IService<MenuPO> {
      * 根据用户id获取菜单列表
      * @return
      */
-    List<MenuPO> getMenusByAdminId();
+    List<MenuPO> getMenusByUserId();
 
     /**
      * 根据角色获取菜单列表

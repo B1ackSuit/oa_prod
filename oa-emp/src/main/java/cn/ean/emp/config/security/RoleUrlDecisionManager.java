@@ -40,7 +40,15 @@ public class RoleUrlDecisionManager implements AccessDecisionManager {
             }
             //判断用户角色是否为url所需角色
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            if(null == authorities) {
+                System.out.println("RoleUrlDecision: authorities == null");
+            }
+            assert authorities != null;
             for (GrantedAuthority authority : authorities) {
+
+                System.out.println("RoleUrlDecision: has authority: " + authority.getAuthority());
+                System.out.println("RoleUrlDecision: needRole: " + needRole);
+
                 if (authority.getAuthority().equals(needRole)){
                     return;
                 }

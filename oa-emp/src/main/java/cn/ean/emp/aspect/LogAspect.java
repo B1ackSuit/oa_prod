@@ -2,6 +2,7 @@ package cn.ean.emp.aspect;
 
 import cn.ean.emp.model.dto.UserDTO;
 import cn.ean.emp.model.po.SysLogPO;
+import cn.ean.emp.model.po.UserPO;
 import cn.ean.emp.service.ISysLogService;
 import cn.ean.emp.util.UserUtils;
 import cn.ean.emp.util.charopn.StringUtils;
@@ -68,7 +69,7 @@ public class LogAspect {
         try
         {
             // 获取当前的用户
-            UserDTO loginUser = UserUtils.getCurrentUser();
+            UserPO loginUser = UserUtils.getCurrentUser();
 
 
             // *========数据库日志=========*//

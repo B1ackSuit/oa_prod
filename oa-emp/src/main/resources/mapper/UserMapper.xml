@@ -42,7 +42,7 @@
         role.authorityName AS authorityName
         FROM
         oa_user AS user
-        LEFT JOIN oa_user_role AS userrole ON userrole.userId = userrole.id
+        LEFT JOIN oa_user_role AS userrole ON userrole.userId = user.id
         LEFT JOIN oa_role AS role ON userrole.roleId = role.id
         WHERE
         user.id != #{id}

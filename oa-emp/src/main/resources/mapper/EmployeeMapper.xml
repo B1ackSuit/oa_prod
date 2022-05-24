@@ -139,7 +139,7 @@
         <if test=" null != employeePO.engageForm and '' != employeePO.engageForm ">
             AND emp.engageForm = #{employeePO.engageForm}
         </if>
-        <if test="null!=employee.departmentId">
+        <if test="null!=employeePO.departmentId">
             AND emp.departmentId = #{employeePO.departmentId}
         </if>
         <if test=" null != beginDateScope and 2 == beginDateScope.length ">

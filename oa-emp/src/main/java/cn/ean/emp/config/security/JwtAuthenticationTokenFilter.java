@@ -58,9 +58,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             String authToken = authHeader.substring(tokenHead.length());
             String userName = jwtTokenUtils.getUserNameFromToken(authToken);
 
-            System.out.println("\n\n=====JwtAuthenticationTokenFilter debugger:" +
-                    "\nauthToken: " + authToken + "\nusername:" + userName);
-
             // token存在用户名，但是未登录
             if (null != userName && null == SecurityContextHolder.getContext().getAuthentication()) {
 

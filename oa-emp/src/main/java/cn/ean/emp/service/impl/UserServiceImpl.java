@@ -118,7 +118,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
     @Override
     public UserPO getUserByUserName(String userName) {
         UserPO userPO = userMapper.selectOne(new QueryWrapper<UserPO>()
-                .eq("name", userName)
+                .eq("workId", userName)
                 .eq("enabled", true));
 
         return userPO;
@@ -143,6 +143,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
      */
     @Override
     public List<UserPO> getAllUsers(String keyWords) {
+        System.out.println("UserServiceImpl getAllUsers: List<UserPO>:"
+                + userMapper.getAllUsers(UserUtils.getCurrentUser().getId(), keyWords).get(0).getRoles().get(0).getAuthorityName());
         return userMapper.getAllUsers(UserUtils.getCurrentUser().getId(), keyWords);
     }
 
@@ -175,23 +177,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
     @Override
     public ResponseBO updateUserPassword(String oldPass, String pass, Integer userId) {
         UserPO userPO = userMapper.selectById(userId);
+       // userPO = UserUtils.getCurrentUser();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         // 判断旧密码是否正确
-        if (encoder.matches(oldPass, userPO.getPassword())) {
+        if (passwordEncoder.matches(oldPass, userPO.getPassword())) {
+            System.out.println("=======密码匹配");
             userPO.setPassword(encoder.encode(pass));
             if (1 == userMapper.updateById(userPO)) {
                 return ResponseBO.success("用户密码更新成功");
             }
         } else {
-
             userPO.setPassword(encoder.encode(pass));
 
-            System.out.println("=====userServiceImpl updateUserPassword: 加密前后的密码：" +
-                    "\n加密前 ==> pass: " + pass + "\n加密后 ==> encode pass: " + encoder.encode(pass) +
-                    "防止密码出问题，数据库备份原密码pass:123,加密后:$2a$10$GWvyKxtS7Gysd/b/he6sz.w/rj2NA8VQuYjpzbIFamnTdIbnxnfIy");
-
             if (1 == userMapper.updateById(userPO)) {
-                return ResponseBO.success("旧密码错误，实验阶段设置用户密码更新成功");
+                return ResponseBO.success("旧密码正确但无法匹配，实验阶段设置用户密码更新成功");
             }
         }
 

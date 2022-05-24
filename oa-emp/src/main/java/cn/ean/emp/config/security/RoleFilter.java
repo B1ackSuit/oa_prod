@@ -42,6 +42,7 @@ public class RoleFilter implements FilterInvocationSecurityMetadataSource {
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         //获取请求的url
         String requestUrl = ((FilterInvocation) object).getRequestUrl();
+        System.out.println("=====debugger: RoleFilter getAttributes requestUrl:" + requestUrl + "\n");
         List<MenuPO> menus = menuService.getMenusWithRole();
         for (MenuPO menu : menus) {
 

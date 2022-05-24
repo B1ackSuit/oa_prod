@@ -90,8 +90,8 @@
         SELECT
             m.*,
             tr.id AS rid,
-            tr.authority AS rname,
-            tr.authorityName AS rnameZh
+            tr.authority AS authority,
+            tr.authorityName AS authorityName
         FROM
             oa_menu m
                 LEFT JOIN oa_menu_role tmr ON m.id = tmr.mid

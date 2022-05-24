@@ -45,7 +45,7 @@ public class UserController {
         return userService.getAllUsers(keyWords);
     }
 
-    @Log(title = "更新用户")
+    @Log(title = "更新用户", businessType = BusinessTypeEnum.UPDATE)
     @ApiOperation(value = "更新用户")
     @PutMapping("/")
     public ResponseBO updateUser(@RequestBody UserPO userPO) {
@@ -55,7 +55,7 @@ public class UserController {
         return ResponseBO.error("用户更新失败");
     }
 
-    @Log(title = "删除用户")
+    @Log(title = "删除用户", businessType = BusinessTypeEnum.DELETE)
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/{id}")
     public ResponseBO deleteUser(@PathVariable Integer id) {
@@ -66,14 +66,14 @@ public class UserController {
 
     }
 
-    @Log(title = "获取所有角色")
+    @Log(title = "获取所有角色", businessType = BusinessTypeEnum.LIST)
     @ApiOperation(value = "获取所有角色")
     @GetMapping("/roles")
     public List<RolePO> getAllRoles() {
         return roleService.list();
     }
 
-    @Log(title = "更新用户角色")
+    @Log(title = "更新用户角色", businessType = BusinessTypeEnum.UPDATE)
     @ApiOperation(value = "更新用户角色")
     @PutMapping("/role")
     public ResponseBO updateUserRole(Integer userId, Integer[] rids) {

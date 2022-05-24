@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 @Accessors(chain = true)
-@TableName("t_mail_log")
+@TableName("oa_mail_log")
 @ApiModel(value="MailLogPO对象", description="MailLogPO对象")
 public class MailLogPO implements Serializable {
 

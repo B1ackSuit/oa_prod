@@ -33,7 +33,7 @@ public class RestAuthorizationEntryPoint implements AuthenticationEntryPoint {
 
         PrintWriter out = httpServletResponse.getWriter();
 
-        ResponseBO bo = ResponseBO.error("尚未登录，请重新登录");
+        ResponseBO bo = ResponseBO.error("尚未登录/未有此账号，请重新登录或者输入账号信息");
         bo.setCode(401);
 
         out.write(new ObjectMapper().writeValueAsString(bo));

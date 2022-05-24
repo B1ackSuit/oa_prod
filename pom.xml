@@ -36,7 +36,7 @@
         <kaptcha-v>0.0.9</kaptcha-v>
 
         <mysql-v>8.0.23</mysql-v>
-        <mybatis-plus-v>3.4.2</mybatis-plus-v>
+        <mybatis-plus-v>3.3.1</mybatis-plus-v>
         <lombok-v>1.18.16</lombok-v>
 
         <act-v>7.1.0.M5</act-v>
@@ -188,11 +188,7 @@
                 <version>${aspectj-v}</version>
             </dependency>
 
-            <!-- Boot整合AMQP消息队列 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-amqp</artifactId>
-            </dependency>
+
             <!-- rabbit监听器 依赖 -->
             <dependency>
                 <groupId>org.springframework.amqp</groupId>

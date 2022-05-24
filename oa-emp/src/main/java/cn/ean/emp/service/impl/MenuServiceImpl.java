@@ -39,7 +39,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuPO> implements 
      * @return
      */
     @Override
-    public List<MenuPO> getMenusByAdminId() {
+    public List<MenuPO> getMenusByUserId() {
         Integer adminId = UserUtils.getCurrentUser().getId();
 
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();

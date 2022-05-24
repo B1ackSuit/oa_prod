@@ -2,6 +2,7 @@ package cn.ean.emp.util;
 
 
 import cn.ean.emp.model.dto.UserDTO;
+import cn.ean.emp.model.po.UserPO;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -16,10 +17,10 @@ public class UserUtils {
     /**
      * 获取当前登录的用户
      *
-     * @return UserDTO
+     * @return UserPO
      */
-    public static UserDTO getCurrentUser() {
-        return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public static UserPO getCurrentUser() {
+        return (UserPO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 

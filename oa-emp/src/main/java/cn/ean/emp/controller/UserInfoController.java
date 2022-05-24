@@ -1,5 +1,7 @@
 package cn.ean.emp.controller;
 
+import cn.ean.emp.aspect.BusinessTypeEnum;
+import cn.ean.emp.aspect.Log;
 import cn.ean.emp.model.bo.ResponseBO;
 import cn.ean.emp.model.dto.UserDTO;
 import cn.ean.emp.model.po.UserPO;
@@ -33,8 +35,9 @@ public class UserInfoController {
         this.userService = userService;
     }
 
+    @Log(title = "更新当前的用户信息", businessType = BusinessTypeEnum.UPDATE)
     @ApiOperation(value = "更新当前用户信息")
-    @PutMapping("/admin/info")
+    @PutMapping("/user/info")
     public ResponseBO updateAdmin(@RequestBody UserDTO user, Authentication authentication){
         UserPO userPO = new UserPO()
                 .setId(user.getId())
@@ -50,13 +53,15 @@ public class UserInfoController {
         return ResponseBO.error("当前用户信息更新失败！");
     }
 
+    @ApiOperation(value = "更新当前用户密码")
+    @PutMapping("/user/pass")
+    public ResponseBO updateUserPassword(@RequestBody Map<String,Object> info){
 
-    @ApiOperation(value = "更新用户密码")
-    @PutMapping("/admin/pass")
-    public ResponseBO updateAdminPassword(@RequestBody Map<String,Object> info){
         String oldPass = (String) info.get("oldPass");
         String pass = (String) info.get("pass");
         Integer userId = (Integer) info.get("adminId");
+        System.out.println("=====UserInfoController updateUserPwd Map<> info: " + oldPass
+        + " " + pass + " " + userId);
         return userService.updateUserPassword(oldPass,pass,userId);
     }
 

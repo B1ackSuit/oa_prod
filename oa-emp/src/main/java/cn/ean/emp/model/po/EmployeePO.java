@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ import java.time.LocalDate;
  **/
 @Data
 @Accessors(chain = true)
-@TableName("t_employee")
+@TableName("oa_employee")
 @ApiModel(value="EmployeePO对象", description="EmployeePO对象")
 public class EmployeePO implements Serializable {
 

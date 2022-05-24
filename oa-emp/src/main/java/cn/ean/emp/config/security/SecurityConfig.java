@@ -136,17 +136,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return username -> {
             UserPO userPO = userService.getUserByUserName(username);
-            UserDTO userDTO = new UserDTO()
-                    .setId(userPO.getId())
-                    .setWorkId(userPO.getWorkId())
-                    .setPassword(userPO.getPassword())
-                    .setName(userPO.getName())
-                    .setPhone(userPO.getPhone())
-                    .setUserFace(userPO.getUserFace())
-                    .setEnabled(userPO.getEnabled());
-            if (null != userDTO) {
-                userDTO.setRolePOs(userService.getRoles(userDTO.getId()));
-                return userDTO;
+            if (null != userPO) {
+                userPO.setRoles(userService.getRoles(userPO.getId()));
+                return userPO;
             }
             // Spring Security提供的异常
             throw new UsernameNotFoundException("===Security debugger: UserDetailService: 用户名或密码不正确");

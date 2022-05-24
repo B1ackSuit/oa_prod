@@ -17,8 +17,8 @@ import java.io.Serializable;
  **/
 @Data
 @Accessors(chain = true)
-@TableName("t_employee_reward")
-@ApiModel(value="reward对象", description="")
+@TableName("oa_employee_reward")
+@ApiModel(value="EmployeeRewardPO对象", description="EmployeeRewardPO对象")
 public class EmployeeRewardPO implements Serializable {
 
     private static final long serialVersionUID = 1L;

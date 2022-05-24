@@ -38,5 +38,5 @@ public class ChatMessageDTO {
     /**
      * 昵称
      */
-    private String formNickName;
+    private String fromNickName;
 }

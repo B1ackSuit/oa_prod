@@ -117,7 +117,7 @@ spring:
 
 mybatis-plus:
   # type-aliases扫描路径
-  #  type-aliases-package: cn.ean.oaemployee.model.po
+  #  type-aliases-package: cn.ean.emp.model.po
   # mapper xml实现扫描路径
   mapper-locations: classpath*:/mapper/*.xml
   configuration:
