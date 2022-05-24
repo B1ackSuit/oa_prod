@@ -148,7 +148,7 @@ public class LogAspect {
     private void setRequestValue(JoinPoint joinPoint, SysLogPO operLog) throws Exception
     {
         String requestMethod = operLog.getMethod();
-        if (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod))
+        if (HttpMethodEnum.PUT.name().equals(requestMethod) || HttpMethodEnum.POST.name().equals(requestMethod))
         {
             String params = argsArrayToString(joinPoint.getArgs());
             operLog.setParams(StringUtils.substring(params, 0, 2000));

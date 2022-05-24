@@ -10,24 +10,24 @@ import java.util.Map;
  * @FileName HttpMethod
  * @Date 2022/5/24 01:08
  **/
-public enum HttpMethod {
+public enum HttpMethodEnum {
     /**
      *
      */
     GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE;
 
-    private static final Map<String, HttpMethod> mappings = new HashMap<>(16);
+    private static final Map<String, HttpMethodEnum> mappings = new HashMap<>(16);
 
     static
     {
-        for (HttpMethod httpMethod : values())
+        for (HttpMethodEnum httpMethod : values())
         {
             mappings.put(httpMethod.name(), httpMethod);
         }
     }
 
     @Nullable
-    public static HttpMethod resolve(@Nullable String method)
+    public static HttpMethodEnum resolve(@Nullable String method)
     {
         return (method != null ? mappings.get(method) : null);
     }
