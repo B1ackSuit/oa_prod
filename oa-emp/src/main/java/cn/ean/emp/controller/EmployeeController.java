@@ -190,6 +190,8 @@ public class EmployeeController {
         try {
             List<EmployeePO> list = ExcelImportUtil.importExcel(file.getInputStream(), EmployeePO.class, params);
             list.forEach(employee -> {
+                // 此处可以后续完善逻辑外键关联
+
                 //民族id
                 employee.setNationId(nationList.get(nationList.indexOf(new NationPO(employee.getNationPO().getName()))).getId());
                 //政治面貌id

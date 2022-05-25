@@ -13,8 +13,9 @@ import java.time.format.DateTimeFormatter;
  * @FileName DateUtils
  * @Date 2022/5/18 01:49
  **/
-@Component
 public class DateUtils {
+
+
 
     /**
      * imp functional interface org.springframework.core.convert.converter.Converter< String, LocalDate >

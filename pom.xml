@@ -71,13 +71,7 @@
 
         <dependencies>
 
-            <!-- Boot整合security 依赖-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <!-- 子模块若要成功引入此依赖 必须提前声明版本，否则报错版本Unknown -->
-                <version>${springboot-v}</version>
-            </dependency>
+
             <!--JWT 依赖-->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -168,17 +162,13 @@
                 <artifactId>swagger-bootstrap-ui</artifactId>
                 <version>${swagger-bootstrap-ui-v}</version>
             </dependency>
-            <!-- 如果是swagger1 依赖如下 -->
+            <!-- 如果是swagger2整合 依赖如下 -->
             <dependency>
                 <groupId>com.spring4all</groupId>
                 <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>${swagger1-boot-v}</version>
             </dependency>
-            <!-- 如果是swagger1并且Spring Boot版本大于2.3.1，需要引入Boot整合validation 依赖 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-validation</artifactId>
-            </dependency>
+
 
 
             <!-- aspectj -->
