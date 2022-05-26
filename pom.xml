@@ -207,16 +207,8 @@
                 <version>${easypoi-v}</version>
             </dependency>
 
-            <!-- Boot整合mail -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-mail</artifactId>
-            </dependency>
-            <!-- Boot整合thymeleaf -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            </dependency>
+
+
 
 
 

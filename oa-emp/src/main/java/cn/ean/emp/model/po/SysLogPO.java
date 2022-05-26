@@ -74,7 +74,7 @@ public class SysLogPO {
     /**
      * 操作人
      */
-    @ApiModelProperty(value = "操作人")
+    @ApiModelProperty(value = "操作人id")
     @TableField("operUser")
     private String operUser;
 

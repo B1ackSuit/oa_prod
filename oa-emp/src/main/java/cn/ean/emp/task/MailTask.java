@@ -48,7 +48,7 @@ public class MailTask {
      */
 //    @Scheduled(cron = "0/10 * * * * ?")
     // 已设置长时间，方便测试
-    @Scheduled(cron = "* * * * 1 ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void mailTask(){
         List<MailLogPO> list = mailLogService.list(new QueryWrapper<MailLogPO>()
                 .eq("status", 0)

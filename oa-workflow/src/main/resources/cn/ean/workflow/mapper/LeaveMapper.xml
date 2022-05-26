@@ -19,7 +19,7 @@
     </resultMap>
 
     <select id="getLeaveAndStatusList" resultMap="LeaveAndStatusList">
-        SELECT t1.*, t2.* FROM leave t1
+        SELECT t1.*, t2.* FROM oa_leave t1
         LEFT JOIN business_status t2
         ON t1.id = t2.business_key
         WHERE t1.username = #{req.username}

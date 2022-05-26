@@ -1,0 +1,65 @@
+
+server:
+  port: 8083
+
+spring:
+
+  datasource:
+    druid:
+      # \u6570\u636E\u5E93\u8BBF\u95EE\u914D\u7F6E\uFF0C\u4F7F\u7528druid\u6570\u636E\u6E90
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/oa_ean?serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+
+
+  # \u90AE\u4EF6\u914D\u7F6E
+  mail:
+    # \u90AE\u4EF6\u670D\u52A1\u5668\u5730\u5740
+    host: smtp.163.com
+    # \u534F\u8BAE
+    protocol: smtp
+    # \u7F16\u7801\u683C\u5F0F
+    default-encoding: utf-8
+    # \u6388\u6743\u7801\uFF08\u5728\u90AE\u7BB1\u5F00\u901A\u670D\u52A1\u65F6\u83B7\u53D6\uFF09
+    password: CRZAHFKRGEIVUQOI
+    # \u53D1\u9001\u8005\u90AE\u7BB1\u5730\u5740
+    username: ean969648839@163.com
+    # \u7AEF\u53E3\uFF08\u4E0D\u540C\u90AE\u7BB1\u7AEF\u53E3\u53F7\u4E0D\u540C\uFF09
+    port: 25
+
+  rabbitmq:
+
+
+
+    username: guest
+    password: root
+
+    host: localhost
+
+    port: 5672
+
+    listener:
+      simple:
+        # \u5F00\u542F\u624B\u52A8\u786E\u8BA4
+        acknowledge-mode: manual
+
+
+  redis:
+    #\u8D85\u65F6\u65F6\u95F4
+    timeout: 10000ms
+    database: 0
+    host: localhost
+    port: 6379
+
+    lettuce:
+      pool:
+        #\u6700\u5927\u8FDE\u63A5\u6570\uFF0C\u9ED8\u8BA48
+        max-active: 1024
+        #\u6700\u5927\u8FDE\u63A5\u963B\u585E\u7B49\u5F85\u65F6\u95F4\uFF0C\u9ED8\u8BA4-1
+        max-wait: 10000ms
+        #\u6700\u5927\u7A7A\u95F2\u8FDE\u63A5
+        max-idle: 200
+        #\u6700\u5C0F\u7A7A\u95F2\u8FDE\u63A5
+        min-idle: 5

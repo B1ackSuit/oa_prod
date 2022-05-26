@@ -20,7 +20,7 @@
     <select id="getSysLogByPage" resultMap="BaseResultMap">
         select * from oa_sys_log where 1=1
         <if test="null != name and '' != name">
-            AND operUser LIKE CONCAT( '%', #{name}, '%' )
+            AND descr LIKE CONCAT( '%', #{name}, '%' )
         </if>
     </select>
 

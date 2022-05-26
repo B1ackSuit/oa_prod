@@ -41,4 +41,7 @@ public interface EmployeeMapper extends BaseMapper<EmployeePO> {
      * @return
      */
     IPage<EmployeePO> getEmployeeWithSalary(Page<EmployeePO> page);
+
+
+    List<EmployeePO> getEmployeeLimit10();
 }

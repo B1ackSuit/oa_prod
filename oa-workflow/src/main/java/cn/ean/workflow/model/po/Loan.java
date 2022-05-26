@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import cn.ean.workflow.enums.BusinessStatusEnum;
 import cn.ean.workflow.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -59,6 +60,7 @@ public class Loan implements Serializable {
     @TableField(exist = false)
     @ApiModelProperty("流程状态")
     private Integer status;
+
     public String getStatusStr() {
         if(this.status == null) {
             return "";

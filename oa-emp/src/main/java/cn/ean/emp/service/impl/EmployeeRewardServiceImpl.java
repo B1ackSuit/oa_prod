@@ -52,7 +52,8 @@ public class EmployeeRewardServiceImpl extends ServiceImpl<EmployeeRewardMapper,
 
 
         EmployeePO employee = employeeMapper.getEmployee(employeeReward.getEid()).get(0);
-
+        System.out.println("EmployeeReward updateInfo employeeSalary:" + employee.getSalaryId());
+        System.out.println("EmployeeReward updateInfo employeeRewardSalary:" + employeeReward.getEid());
         if (! employeeReward.getSid().equals(employee.getSalaryId())) {
             employee.setSalaryId(employeeReward.getSid());
             employeeMapper.updateById(employee);

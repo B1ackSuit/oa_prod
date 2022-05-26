@@ -197,7 +197,18 @@ public class EmployeeController {
                 //政治面貌id
                 employee.setPoliticId(politicsStatusList.get(politicsStatusList.indexOf(new PoliticsStatusPO(employee.getPoliticsStatusPO().getName()))).getId());
                 //部门id
-                employee.setDepartmentId(departmentList.get(departmentList.indexOf(new DepartmentPO(employee.getDepartmentPO().getName()))).getId());
+                DepartmentPO departmentPO = new DepartmentPO(employee.getDepartmentPO().getName());
+                System.out.println("EController insertEMP: new departmentPO.getName:" + departmentPO.getName());
+                System.out.println("EController insertEMP: emp.getDepartmentPO.getName:" + employee.getDepartmentPO().getName());
+                int i = departmentList.indexOf(employee.getDepartmentPO());
+                for (DepartmentPO department : departmentList) {
+                    if (department.getName().equals(departmentPO.getName())){
+                        employee.setDepartmentId(department.getId());
+                        System.out.println("EController insertEMP: foreach success");
+                    }
+                }
+                System.out.println("EController insertEMP: departmentList.indexOf(departmentPO), Bound:" + i);
+              //  employee.setDepartmentId(departmentList.get(departmentList.indexOf(new DepartmentPO(employee.getDepartmentPO().getName()))).getId());
                 //职称id
                 employee.setJobLevelId(jobLevelList.get(jobLevelList.indexOf(new JobLevelPO(employee.getJobLevelPO().getName()))).getId());
                 //职位id

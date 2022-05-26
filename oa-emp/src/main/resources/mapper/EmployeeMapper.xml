@@ -89,6 +89,9 @@
         <association property="departmentPO" javaType="cn.ean.emp.model.po.DepartmentPO">
             <result column="dname" property="name" />
         </association>
+        <association property="jobLevelPO" javaType="cn.ean.emp.model.po.JobLevelPO">
+            <result column="jname" property="name" />
+        </association>
     </resultMap>
 
 
@@ -188,6 +191,7 @@
         SELECT
             e.*,
             d.`name` AS dname,
+            o.name AS jname,
             s.id AS sid,
             s.`name` AS sname,
             s.basicSalary AS sbasicSalary,
@@ -205,10 +209,16 @@
             oa_employee e
                 LEFT JOIN oa_salary s ON e.salaryId = s.id
                 LEFT JOIN oa_department d ON e.departmentId = d.id
+                LEFT JOIN oa_joblevel o on e.jobLevelId = o.id
         ORDER BY
             e.id
 
 
+    </select>
+    <select id="getEmployeeLimit10" resultMap="BaseResultMap">
+        select
+        e.name, e.phone, e.workID
+        from oa_employee e limit 10
     </select>
 
 </mapper>

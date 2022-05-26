@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import cn.ean.workflow.enums.LeaveTypeEnum;
 import cn.ean.workflow.enums.BusinessStatusEnum;
 import cn.ean.workflow.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,7 +22,7 @@ import java.util.Date;
  **/
 @Data
 @ApiModel("请假申请实体")
-@TableName("leave")
+@TableName("oa_leave")
 public class Leave implements Serializable {
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
@@ -78,6 +79,7 @@ public class Leave implements Serializable {
     @TableField(exist = false)
     @ApiModelProperty("流程状态")
     private Integer status;
+
     public String getStatusStr() {
         if(this.status == null) {
             return "";
